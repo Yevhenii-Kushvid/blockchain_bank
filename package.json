@@ -1,0 +1,10 @@
+{
+  "name": "blockchain_bank",
+  "private": true,
+  "dependencies": {
+    "redis": "^2.7.1",
+    "sleep": "^5.1.1",
+    "solc": "^0.4.11",
+    "web3": "^0.19.0"
+  }
+}
