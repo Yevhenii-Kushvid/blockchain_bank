@@ -10,20 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170613114638) do
+ActiveRecord::Schema.define(version: 20170616105825) do
 
   create_table "loans", force: :cascade do |t|
-    t.integer "loaner"
-    t.integer "loanee"
-    t.float "amount"
-    t.integer "status"
+    t.string "address"
+    t.integer "from"
+    t.integer "to"
+    t.string "amount"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.string "address"
+    t.string "from"
+    t.string "to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "role"
+    t.string "address"
     t.string "name"
+    t.string "ballance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

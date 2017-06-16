@@ -19,6 +19,7 @@ deployedContract = LoanContract.new('me', 'me', '0$', {data: code, from: web3.et
   address = hash.address;
   if (address != undefined){
     client.quit();
+    console.log(hash.transactionHash);
     console.log(address);
   } else {
     console.log('undefined');
