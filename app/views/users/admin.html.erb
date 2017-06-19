@@ -1,0 +1,45 @@
+<table class='table highlight bordered'>
+  <th>
+    <td>id</td>
+    <td>from</td>
+    <td>to</td>
+    <td>amount</td>
+    <td>status</td>
+    <td>action</td>
+  </th>
+    <% @loans.each do |loan| %>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <%= link_to loan.id.to_s, user_loan_path(loan) %>
+      </td>
+
+      <td>
+        <%= User.find(loan.from).address %>
+      </td>
+      
+      <td>
+        <%= User.find(loan.to).address %>
+      </td>
+
+      <td>
+        <%= loan.status %>
+      </td>
+
+      <td>
+        <%= loan.amount %>
+      </td>
+
+      <td>
+        <% if loan.status == 'review' %>
+          <%= link_to 'open', user_loan_open_path(loan.from, loan), method: :post, class: "waves-effect waves-light btn" %>
+        <% else %>
+          <%if loan.status == 'open' %>
+            <%= link_to 'close', user_loan_close_path(loan.from, loan), method: :post, class: "waves-effect waves-light btn red" %>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

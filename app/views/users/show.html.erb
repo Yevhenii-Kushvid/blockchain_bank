@@ -1,0 +1,38 @@
+<h3>show user <%= @user.address %></h3>
+
+<%= link_to 'create loan', new_user_loan_path(@user), class: "waves-effect waves-light btn" %>
+
+<table class='table highlight bordered'>
+  <th>
+    <td>id</td>
+    <td>from</td>
+    <td>to</td>
+    <td>amount</td>
+    <td>status</td>
+  </th>
+    <% @loans.each do |loan| %>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <%= link_to loan.id.to_s, user_loan_path(loan) %>
+      </td>
+
+      <td>
+        <%= User.find(loan.from).address %>
+      </td>
+      
+      <td>
+        <%= User.find(loan.to).address %>
+      </td>
+
+      <td>
+        <%= loan.status %>
+      </td>
+
+      <td>
+        <%= loan.amount %>
+      </td>
+    </tr>
+  <% end %>
+</table>

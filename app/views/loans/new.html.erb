@@ -1,0 +1,6 @@
+new loan for user
+
+<%= form_for @loan, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+  <%= f.text_field :amount, placeholder: 'amount' %>
+  <%= f.submit "Create" %>
+<% end %>

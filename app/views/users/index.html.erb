@@ -1,0 +1,7 @@
+<h1>index users</h1>
+
+<ul>
+  <% @users.each.with_index do |user, index| %>
+    <li><%= link_to "#{user.id}. #{user.address}", user_path(user), class: "chip #{'red' if index == 0}" %></li>
+  <% end %>
+</ul>

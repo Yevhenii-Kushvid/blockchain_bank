@@ -24,7 +24,6 @@ deployedContract = LoanContract.new(process.argv[2], process.argv[3], process.ar
   } else {
     console.log('undefined');
   }
-
 });
 
 contractInstance = LoanContract.at(address);
