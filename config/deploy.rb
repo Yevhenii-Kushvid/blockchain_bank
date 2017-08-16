@@ -1,5 +1,4 @@
 # config valid only for current version of Capistrano
-# lock '3.4.0'
 
 set :log_level, :debug
 set :repo_url, 'git@bitbucket.org:mort_reany/blockchain_bank.git'
@@ -8,7 +7,7 @@ set :application, 'BlockChainBank'
 set :stages, %w(production staging)
 
 set :rvm_type, :system
-set :rvm_ruby_version, 'ruby-2.3.0@blockchain_bank'
+set :rvm_ruby_version, 'ruby-2.3@blockchain_bank'
 
 set :deploy_via, :copy
 
