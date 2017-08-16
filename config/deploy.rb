@@ -1,53 +1,45 @@
-require 'rvm/capistrano'
-require 'bundler/capistrano'
-
-
 # config valid only for current version of Capistrano
-lock "3.9.0"
+# lock '3.4.0'
+
+set :log_level, :debug
+set :repo_url, 'git@bitbucket.org:mort_reany/blockchain_bank.git'
+set :application, 'BlockChainBank'
 
 set :stages, %w(production staging)
-set :default_stage, "staging"
-require 'capistrano/ext/multistage'
 
-ssh_options[:forward_agent] = true
-default_run_options[:pty] = true
-set :use_sudo, false
-set :keep_releases, 5
-set :scm, :git
+set :rvm_type, :system
+set :rvm_ruby_version, 'ruby-2.3.0@blockchain_bank'
 
 set :deploy_via, :copy
 
-set :repository, 'git@bitbucket.org:mort_reany/blockchain_bank.git'
-set :application, 'BlockChainBank'
+set :linked_files, %w{config/database.yml config/secrets.yml config/local_env.yml }
+set :linked_dirs, %w{log tmp/pids public/uploads public/assets public/system}
 
-task :create_log_share do
-  run "mkdir -p #{shared_path}/log"
-end
-before 'deploy:update', :create_log_share
+# set :sidekiq_config, -> { File.join('config', 'sidekiq.yml') }
 
-# расскоментировать при проблемах с полнотекстовым поиском
-after 'deploy', 'deploy:cleanup', 'deploy:migrate', 'deploy:seed'
+# set :deploy_via, :copy
 
-# Правила для перезапуска unicorn. Их стоит просто принять на веру - они работают.
-# В случае с Rails 3 приложениями стоит заменять bundle exec unicorn_rails на bundle exec unicorn
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+set :rails_env, "production"
+
+# Default value for keep_releases is 5
+set :keep_releases, 5
+
+unicorn_pid   = "~/blockchain_bank_app/shared/pids/unicorn.pid"
+
+after 'deploy:publishing', 'deploy:restart'
+
 namespace :deploy do
-  task :rb do
-    run "cd #{deploy_to}/current && RAILS_ENV=#{env} bundle exec rake db:drop && RAILS_ENV=#{env} bundle exec rake db:create"
-  end
-
   task :restart do
-    run "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -USR2 `cat #{unicorn_pid}`; else cd #{deploy_to}/current && bundle exec unicorn_rails -c #{unicorn_conf} -E #{rails_env} -D; fi"
+    invoke 'deploy:stop_server'
+    invoke 'unicorn:legacy_restart'
   end
 
-  task :start do
-    run "cd #{deploy_to}/current && bundle exec unicorn_rails -c #{unicorn_conf} -E #{rails_env} -D"
-  end
-
-  task :stop do
-    run "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -9 `cat #{unicorn_pid}`; fi"
-  end
-
-  task :seed do
-    run "cd #{current_release} && bundle exec rake db:seed RAILS_ENV=#{env}"
+  desc "Stop server"
+  task :stop_server do
+    on roles(:all) do
+      execute "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -9 `cat #{unicorn_pid}`; fi"
+    end
   end
 end
