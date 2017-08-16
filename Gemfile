@@ -37,6 +37,7 @@ gem 'redis', '~>3.2'
 # gem 'devise'
 
 gem 'pg'
+gem 'unicorn'
 
 gem 'capistrano-unicorn', :require => false
 
