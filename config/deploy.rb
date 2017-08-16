@@ -11,7 +11,7 @@ set :rvm_ruby_version, 'ruby-2.3@blockchain_bank'
 
 set :deploy_via, :copy
 
-set :linked_files, %w{config/database.yml config/secrets.yml config/local_env.yml }
+set :linked_files, %w{config/database.yml config/secrets.yml}
 set :linked_dirs, %w{log tmp/pids public/uploads public/assets public/system}
 
 # set :sidekiq_config, -> { File.join('config', 'sidekiq.yml') }

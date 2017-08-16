@@ -36,6 +36,8 @@ gem 'redis', '~>3.2'
 
 # gem 'devise'
 
+gem 'pg'
+
 gem 'capistrano-unicorn', :require => false
 
 group :development, :test do
