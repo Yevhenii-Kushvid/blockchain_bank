@@ -10,7 +10,7 @@ err_log    = "#{rails_root}/log/unicorn_error.log"
 old_pid    = pid_file + '.oldbin'
 
 timeout 600
-worker_processes 6
+worker_processes 2
 listen socket_file, :backlog => 1024
 
 # Should be 'production' by default, otherwise use other env

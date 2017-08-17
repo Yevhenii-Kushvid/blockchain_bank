@@ -1,7 +1,7 @@
 # Default branch is :master
 set :stage, :staging
 
-ask :branch, 'staging'
+ask :branch, 'master'
 set :user, 'blockchain_bank'
 
 set :application, 'blockchain_bank_app'
