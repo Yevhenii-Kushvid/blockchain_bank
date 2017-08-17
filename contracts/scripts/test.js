@@ -138,7 +138,7 @@
 // console.log(process.argv[2]);
 
 Web3 = require('web3');
-web3 = new Web3(new Web3.providers.HttpProvider("http://13.94.100.111:8545"));
+var web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
 var filter = web3.eth.filter({fromBlock:0, toBlock: 'latest', address: '0x839677cf8de2baed77478719bde92593109f8ce1'});
 var result = filter.get(function (err, transactions) {
   transactions.forEach(function (tx) {

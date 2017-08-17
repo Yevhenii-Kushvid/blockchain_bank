@@ -5,7 +5,7 @@ Web3 = require('web3');
 
 fs = require('fs');
 
-web3 = new Web3(new Web3.providers.HttpProvider("http://13.94.100.111:8545"));
+var web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
 
 var contractInstance = null;
 code = fs.readFileSync('./contracts/loan.sol').toString();

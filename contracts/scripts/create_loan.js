@@ -2,7 +2,7 @@ var redis = require("redis");
 var client = redis.createClient();
 
 Web3 = require('web3');
-web3 = new Web3(new Web3.providers.HttpProvider("http://13.94.100.111:8545"));
+var web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
 
 fs = require('fs');
 

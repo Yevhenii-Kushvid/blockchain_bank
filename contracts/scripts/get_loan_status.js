@@ -6,7 +6,7 @@ client.get('contract', function(err, reply) {
     address = reply;
 
     var Web3 = require('web3');
-    var web3 = new Web3(new Web3.providers.HttpProvider("http://13.94.100.111:8545"));
+    var web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
 
     var fs = require('fs');
     var abi = JSON.parse(fs.readFileSync('./contracts/build/loan.abi').toString());
